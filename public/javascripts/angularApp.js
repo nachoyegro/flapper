@@ -1,4 +1,4 @@
-var app = angular.module('flapperNews', ['ui.router'])
+var app = angular.module('flapperNews', ['ui.router', 'angularMoment'])
 app.factory('posts', ['$http', function($http){
 	var o = {
     posts: []
@@ -78,6 +78,7 @@ app.controller('MainCtrl', [
 'posts',
 function($scope, posts){
   $scope.posts = posts.posts;
+  $scope.order = '-upvotes';
 
 $scope.addPost = function(){
   if(!$scope.title || $scope.title === '') { return; }
@@ -92,6 +93,10 @@ $scope.addPost = function(){
 $scope.incrementUpvotes = function(post) {
   posts.upvote(post);
 };
+
+$scope.setOrder = function (order) {
+        $scope.order = order;
+    };
 
 }]);
 
